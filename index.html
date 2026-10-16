@@ -1,0 +1,639 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nithiyasri | Digital Resume</title>
+
+<style>
+:root {
+  --bg: #f1f6ff;
+  --card: #ffffff;
+  --text: #183153;
+  --muted: #607493;
+  --primary: #1769e0;
+  --chip: #e7f0ff;
+  --border: #d9e6fa;
+}
+
+body.dark {
+  --bg: #101827;
+  --card: #1b283b;
+  --text: #edf4ff;
+  --muted: #b2c1d8;
+  --primary: #78aaff;
+  --chip: #263b59;
+  --border: #33465f;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  transition: background .25s, color .25s;
+}
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  font-size: 22px;
+  color: var(--primary);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+button, .btn {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  background: var(--primary);
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+button:hover, .btn:hover {
+  opacity: .85;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #172b49;
+  color: white;
+  padding: 30px 22px;
+}
+
+.profile {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 125px;
+  height: 125px;
+  margin: 0 auto 12px;
+  border: 4px solid white;
+  border-radius: 50%;
+  background: #dce9ff;
+  display: grid;
+  place-items: center;
+  color: #1769e0;
+  font-size: 46px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile h2 {
+  font-size: 26px;
+}
+
+.profile p {
+  color: #d8e5fa;
+  font-size: 14px;
+}
+
+nav {
+  display: grid;
+  gap: 7px;
+  margin: 25px 0;
+}
+
+nav a {
+  color: #e5edfb;
+  text-decoration: none;
+  padding: 9px 12px;
+  border-radius: 8px;
+}
+
+nav a:hover {
+  background: #28538b;
+}
+
+.side-contact {
+  border-top: 1px solid #3d5270;
+  padding-top: 20px;
+  overflow-wrap: anywhere;
+}
+
+.side-contact p {
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.side-contact a {
+  color: #dce9ff;
+}
+
+main {
+  padding: 24px;
+  min-width: 0;
+}
+
+.card {
+  background: var(--card);
+  padding: 23px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: 0 4px 15px rgba(28, 67, 120, .04);
+}
+
+.card h2 {
+  color: var(--primary);
+  margin-bottom: 12px;
+  font-size: 23px;
+}
+
+.card p {
+  color: var(--muted);
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.timeline {
+  border-left: 2px solid var(--border);
+  margin-left: 8px;
+  padding-left: 20px;
+}
+
+.entry {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  position: absolute;
+  left: -26px;
+  top: 8px;
+}
+
+.entry h3, .project h3 {
+  font-size: 16px;
+}
+
+.entry p, .project p {
+  font-size: 14px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 18px;
+}
+
+.skill {
+  background: var(--chip);
+  color: var(--primary);
+  padding: 5px 12px;
+  border-radius: 25px;
+  font-size: 13px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.project {
+  border: 1px solid var(--border);
+  padding: 17px;
+  border-radius: 10px;
+}
+
+.project p {
+  margin-top: 7px;
+}
+
+ul {
+  padding-left: 22px;
+  color: var(--muted);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 18px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  margin-bottom: 12px;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 15px;
+  font-size: 12px;
+}
+
+@media (max-width: 850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    padding: 22px;
+  }
+
+  nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main {
+    padding: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  header {
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  header h1 {
+    font-size: 18px;
+  }
+
+  .actions button {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .two-columns,
+  .project-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 17px;
+  }
+}
+
+@media print {
+  :root, body.dark {
+    --bg: white;
+    --card: white;
+    --text: #183153;
+    --muted: #444;
+    --primary: #1769e0;
+    --chip: #e7f0ff;
+    --border: #ddd;
+  }
+
+  header, .sidebar, .no-print, footer {
+    display: none !important;
+  }
+
+  body, main {
+    background: white;
+    color: #183153;
+    padding: 0;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .card {
+    box-shadow: none;
+    break-inside: avoid;
+    margin-bottom: 10px;
+  }
+
+  a {
+    color: #183153;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📄 My Digital Resume</h1>
+  <div class="actions">
+    <button onclick="toggleTheme()" aria-label="Switch theme">
+      🌙 Theme
+    </button>
+    <button onclick="downloadResume()">⬇ Download PDF</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="profile">
+      <div class="avatar" id="avatar">
+        N
+      </div>
+
+      <h2>Nithiyasri</h2>
+      <p>B.Tech | Information Technology</p>
+      <p style="margin-top:12px">Dream • Learn • Grow</p>
+    </div>
+
+    <nav aria-label="Resume sections">
+      <a href="#about">👤 About Me</a>
+      <a href="#education">🎓 Education</a>
+      <a href="#skills">⚙️ Skills</a>
+      <a href="#projects">💻 Projects</a>
+      <a href="#achievements">🏆 Achievements</a>
+      <a href="#contact">✉️ Contact</a>
+    </nav>
+
+    <div class="side-contact">
+      <h3>Contact Me</h3>
+      <p>📧 <a id="emailLink"
+        href="mailto:your.email@example.com">
+        your.email@example.com</a></p>
+
+      <p>📍 Thiruvannamalai, Tamil Nadu</p>
+
+      <p>🐙 <a href="https://github.com/"
+        target="_blank" rel="noopener">
+        My GitHub Profile</a></p>
+
+      <p>🔗 <a href="https://www.linkedin.com/"
+        target="_blank" rel="noopener">
+        My LinkedIn Profile</a></p>
+    </div>
+  </aside>
+
+  <main>
+
+    <section class="card" id="about">
+      <h2>👋 About Me</h2>
+
+      <p>
+        Hello! I am <strong>Nithiyasri</strong>, a B.Tech
+        Information Technology student from Thiruvannamalai.
+        I am interested in technology, programming and learning
+        new skills. My hobby is drawing because I enjoy being
+        creative. My goal is to become a successful IT
+        professional and build a good career in technology.
+      </p>
+    </section>
+
+    <div class="two-columns">
+
+      <section class="card" id="education">
+        <h2>🎓 Education</h2>
+
+        <div class="timeline">
+          <div class="entry">
+            <h3>B.Tech Information Technology</h3>
+            <p>[Your College Name]</p>
+            <p>[Start Year – Graduation Year]</p>
+          </div>
+
+          <div class="entry">
+            <h3>Higher Secondary (12th)</h3>
+            <p>[Your School Name]</p>
+            <p>[Year of Completion]</p>
+          </div>
+
+          <div class="entry">
+            <h3>SSLC (10th)</h3>
+            <p>[Your School Name]</p>
+            <p>[Year of Completion]</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="skills">
+        <h2>⚙️ My Skills</h2>
+
+        <h3>Technical Skills</h3>
+        <div class="skills">
+          <span class="skill">C Programming</span>
+          <span class="skill">HTML</span>
+          <span class="skill">CSS</span>
+          <span class="skill">JavaScript</span>
+          <span class="skill">Python (learning)</span>
+        </div>
+
+        <h3>Tools</h3>
+        <div class="skills">
+          <span class="skill">GitHub</span>
+          <span class="skill">VS Code</span>
+        </div>
+
+        <h3>Personal Strengths</h3>
+        <div class="skills">
+          <span class="skill">Creativity</span>
+          <span class="skill">Teamwork</span>
+          <span class="skill">Willingness to Learn</span>
+        </div>
+      </section>
+
+    </div>
+
+    <section class="card" id="projects">
+      <h2>💻 My Projects</h2>
+
+      <div class="project-grid">
+        <article class="project">
+          <h3>Digital Resume Website</h3>
+          <p>
+            A personal portfolio website created using HTML,
+            CSS and JavaScript to display my education, skills
+            and projects.
+          </p>
+          <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
+        </article>
+
+        <article class="project">
+          <h3>[Your Next Project]</h3>
+          <p>
+            Add a short description of another project you
+            have completed or are currently developing.
+          </p>
+          <p><strong>Technologies:</strong> [Add technologies]</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card" id="achievements">
+      <h2>🏆 Achievements & Interests</h2>
+      <ul>
+        <li>Learning programming and web development.</li>
+        <li>Interested in developing useful technology projects.</li>
+        <li>Enjoy drawing and creative activities.</li>
+        <li>[Add certificates, workshops or awards you have earned.]</li>
+      </ul>
+    </section>
+
+    <section class="card" id="contact">
+      <h2>✉️ Contact Me</h2>
+
+      <div class="contact-grid">
+        <form id="contactForm">
+          <label for="visitorName">Your Name</label>
+          <input id="visitorName" type="text"
+            placeholder="Enter your name" required>
+
+          <label for="visitorEmail">Your Email</label>
+          <input id="visitorEmail" type="email"
+            placeholder="Enter your email" required>
+
+          <label for="visitorMessage">Your Message</label>
+          <textarea id="visitorMessage"
+            placeholder="Write your message..." required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div>
+          <h3>Let's Connect!</h3>
+          <p>
+            Thank you for visiting my digital resume.
+            Feel free to contact me for learning opportunities,
+            collaborations and professional connections.
+          </p>
+          <p style="margin-top:12px">
+            Replace the example email address with your real
+            email address to receive messages.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Nithiyasri |
+      Digital Resume | Built with HTML, CSS & JavaScript
+    </footer>
+
+  </main>
+</div>
+
+<script>
+// Update the footer year automatically.
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+// Switch between light and dark themes.
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  const isDark = document.body.classList.contains("dark");
+  localStorage.setItem("resumeTheme", isDark ? "dark" : "light");
+}
+
+if (localStorage.getItem("resumeTheme") === "dark") {
+  document.body.classList.add("dark");
+}
+
+// Print or save the resume as PDF.
+function downloadResume() {
+  window.print();
+}
+
+// The contact form opens the visitor's email application.
+// Replace this address with your own email address.
+const myEmail = "your.email@example.com";
+
+document.getElementById("contactForm")
+  .addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name =
+      document.getElementById("visitorName").value.trim();
+
+    const email =
+      document.getElementById("visitorEmail").value.trim();
+
+    const message =
+      document.getElementById("visitorMessage").value.trim();
+
+    if (!name || !email || !message) {
+      alert("Please complete all fields.");
+      return;
+    }
+
+    const subject = encodeURIComponent(
+      "Resume website message from " + name
+    );
+
+    const body = encodeURIComponent(
+      "Name: " + name +
+      "\nEmail: " + email +
+      "\n\nMessage:\n" + message
+    );
+
+    window.location.href =
+      "mailto:" + myEmail +
+      "?subject=" + subject +
+      "&body=" + body;
+  });
+</script>
+
+</body>
+</html>
